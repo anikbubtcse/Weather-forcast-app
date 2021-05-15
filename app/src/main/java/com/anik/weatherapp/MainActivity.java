@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView temperature;
     private TextView feelsLike;
     private TextView humidity;
-    ApiService service;
+    private ApiService service;
+    private String token = "92756c24107bc39dd0a7541f66ba55c5";
+    private String unit = "metric";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = editText.getText().toString();
                 service = Apiclient.getRetrofit().create(ApiService.class);
-                Call<WeatherData> call = service.getWeatherData(name);
+                Call<WeatherData> call = service.getWeatherData(name,token,unit);
                 call.enqueue(new Callback<WeatherData>() {
                     @Override
                     public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
